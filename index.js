@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
     // Create a new user with register
     app.post('/register', async (req, res) => {
         try {
-            const { name, email,password } = req.body;
+            const { name, email, password } = req.body;
             const user = await prisma.user.create({
                 data: {
                     name,
